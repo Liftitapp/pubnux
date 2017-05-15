@@ -17,7 +17,7 @@ defmodule PubNux.Mixfile do
   end
 
   def application do
-    [extra_applications: [:logger]]
+    [extra_applications: [:logger, :httpoison]]
   end
 
   defp deps do
