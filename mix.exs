@@ -12,6 +12,8 @@ defmodule PubNux.Mixfile do
       package: package(),
       deps: deps(),
       name: "PubNux",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      preferred_cli_env: preferred_cli_env(),
       source_url: "https://github.com/MrCoffey/pubnux"
     ]
   end
@@ -20,10 +22,15 @@ defmodule PubNux.Mixfile do
     [extra_applications: [:logger, :httpoison]]
   end
 
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
+
   defp deps do
     [
-     {:poison, "~> 2.2"},
-     {:httpoison, "~> 0.9.0"},
+      {:poison, "~> 2.2"},
+      {:httpoison, "~> 0.9.0"},
+      {:exvcr, "~> 0.8", only: :test}
     ]
   end
 
@@ -39,6 +46,12 @@ defmodule PubNux.Mixfile do
       maintainers: ["Jorge Madrid"],
       licenses: ["Apache 2.0"],
       links: %{"GitHub" => "https://github.com/MrCoffey/pubnux"}
+    ]
+  end
+
+  def preferred_cli_env do
+    [
+      vcr: :test, "vcr.delete": :test, "vcr.check": :test, "vcr.show": :test
     ]
   end
 end

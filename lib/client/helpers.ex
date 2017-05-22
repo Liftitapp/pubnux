@@ -2,7 +2,6 @@ defmodule PubNux.Client.Helpers do
   @moduledoc """
   Wrap client helpers
   """
-
   alias PubNux.Client
 
   @spec call_service(Client.t, String.t, String.t) ::
@@ -14,10 +13,8 @@ defmodule PubNux.Client.Helpers do
 
   @spec gen_path(Client.t, String.t, String.t, String.t) :: String.t
   def gen_path(client, service, channel, callback \\ "defaultCallback") do
-    protocol = if client.is_ssl, do: "https:/", else: "http:/"
-
-    [protocol,
-     client.origin,
+    [
+     client.base_url,
      service,
      client.publish_key,
      client.subscription_key,
