@@ -1,4 +1,4 @@
-defmodule PubNux.Client do
+defmodule PubNux.Config do
   @moduledoc """
   Defines the structure of the PubNub client
   """
@@ -10,21 +10,21 @@ defmodule PubNux.Client do
             base_url: nil
 
   @typedoc """
-    Represents Client struct with the PubNub API client
+  Represents Config struct with the PubNub API client
   """
-  @type t :: %Client{origin: String.t,
-                    publish_key: String.t,
-                    subscription_key: String.t,
-                    is_ssl: boolean()}
+  @type t :: %Config{origin: String.t,
+                     publish_key: String.t,
+                     subscription_key: String.t,
+                     is_ssl: boolean()}
 
-  @spec build() :: Client.t
+  @spec build() :: Config.t
   def build() do
-    %Client{base_url: base_url()}
+    %Config{base_url: base_url()}
   end
 
   def base_url do
-    protocol = if %Client{}.is_ssl, do: "https://", else: "http://"
+    protocol = if %Config{}.is_ssl, do: "https://", else: "http://"
 
-    protocol <> %Client{}.origin
+    protocol <> %Config{}.origin
   end
 end
