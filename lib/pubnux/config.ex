@@ -3,7 +3,7 @@ defmodule PubNux.Config do
   Defines the structure of the PubNub client
   """
   alias __MODULE__
-  defstruct origin: "pubsub.pubnub.com",
+  defstruct origin: "pubsub.pubnub.com/",
             publish_key: Application.get_env(:pubnux, :publish_key),
             subscription_key: Application.get_env(:pubnux, :subscription_key),
             is_ssl: Application.get_env(:pubnux, :is_ssl) || false,

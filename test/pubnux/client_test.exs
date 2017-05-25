@@ -1,29 +1,37 @@
 defmodule PubNux.ClientTest do
-  alias PubNux.Client
-  alias PubNux.Config
+  alias PubNux.{Client, Config, Subscription, Publication}
   use ExUnit.Case
   use PubNux.VcrCase
 
-  describe "gen_path/4" do
-    test "builds a valid url with HTTP protocol" do
-      url =
-        Config.build()
-        |> Client.gen_path("publish", "testing")
-
-      assert url =~ "http://pubsub.pubnub.com/publish/"
-    end
-  end
-
   describe "perform_request/2" do
-    test "call provided PubNuB service" do
-      use_cassette "publish_pubnub_message" do
-        response =
+    test "suscribes to specified PubNuB channel" do
+      use_cassette "suscribe_to_pubnub_channel" do
+        data =
           Config.build()
-          |> Client.gen_path("publish", "testing")
-          |> Client.perform_request(Poison.encode!(%{message: "Hola que hace"}))
+          |> Subscription.build()
+          |> Subscription.set_channel("channel_name")
+          |> Client.perform_request()
 
-        {:ok, body} = response
-        assert body.status_code == 200
+        {:ok, response} = data
+        assert response.status_code == 200
+        assert response.body != nil
+      end
+    end
+
+    test "Publish a message to specified PubNux channel" do
+      use_cassette "Publish_pubnub_message" do
+        data =
+          Config.build()
+          |> Publication.build()
+          |> Publication.set_channel("channel_name")
+          |> Publication.set_callback("callback")
+          |> Publication.set_message(%{hola: "mundo"})
+          |> Publication.set_store()
+          |> Client.perform_request()
+
+        {:ok, response} = data
+        assert response.status_code == 200
+        assert response.body != nil
       end
     end
   end
