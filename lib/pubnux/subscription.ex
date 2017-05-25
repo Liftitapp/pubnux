@@ -53,4 +53,16 @@ defmodule PubNux.Subscription do
   def set_callback(%Subscription{} = subscription, callback) do
     put_in(subscription.callback, callback)
   end
+
+  defimpl PubNux.Builder do
+    def build_url(subscription) do
+      url =
+        [subscription.path, subscription.sub_key, subscription.channel, subscription.callback, subscription.time_token]
+        |> Enum.join("/")
+        |> URI.encode()
+
+      [method: "GET", url: url, body: [], headers: []]
+    end
+  end
+
 end

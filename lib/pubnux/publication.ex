@@ -71,4 +71,24 @@ defmodule PubNux.Publication do
   def set_store(%Publication{} = publication) do
     put_in(publication.store, 1)
   end
+
+  defimpl PubNux.Builder do
+    def build_url(publication) do
+      store =
+        if publication.store, do: 1, else: 0
+
+      url =
+        [publication.path, publication.pub_key, publication.sub_key, store, publication.channel, publication.callback]
+        |> Enum.join("/")
+        |> URI.encode()
+
+      [
+        method: :post,
+        url: url,
+        body: publication.message,
+        headers: [{"Content-Type", "application/json"}]
+      ]
+    end
+  end
+
 end
