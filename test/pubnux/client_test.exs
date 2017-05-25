@@ -9,14 +9,12 @@ defmodule PubNux.ClientTest do
 
         sub_args = [{:channel, "channel"}, {:callback, "callback"}, {:time_token, "0"}]
 
-        data =
+        {:ok, data} =
           Config.build()
           |> Subscription.build(sub_args)
           |> Client.perform_request()
 
-        {:ok, response} = data
-        assert response.status_code == 200
-        assert response.body != nil
+        assert data != nil
       end
     end
 
@@ -29,14 +27,12 @@ defmodule PubNux.ClientTest do
           {:store, 0}
         ]
 
-        data =
+        {:ok, data} =
           Config.build()
           |> Publication.build(pub_params)
           |> Client.perform_request()
 
-        {:ok, response} = data
-        assert response.status_code == 200
-        assert response.body != nil
+        assert data != nil
       end
     end
   end
