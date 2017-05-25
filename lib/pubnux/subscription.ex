@@ -1,23 +1,8 @@
 defmodule PubNux.Subscription do
-  alias __MODULE__
-
   @moduledoc """
     Suscribes messages to the provided channel
-
-    ## Examples
-
-    iex>  %Subscription{}
-    ...>  |> Subscription.set_channel("channel_name")
-    ...>  |> Subscription.set_time_token("time_token")
-    ...>  |> Subscription.set_callback("callback")
-    %PubNux.Subscription{
-      callback: "callback",
-      channel: "channel_name",
-      path: nil,
-      sub_key: nil,
-      time_token: "time_token"
-    }
   """
+  alias __MODULE__
 
   defstruct path: nil,
             sub_key: nil,
@@ -34,35 +19,26 @@ defmodule PubNux.Subscription do
                           time_token: String.t,
                           callback: String.t}
 
-  @spec build(Config.t) :: Subscription.t
-  def build(config) do
-    %Subscription{path: config.base_url <> "subscribe", sub_key: config.subscription_key}
-  end
-
-  @spec set_channel(Subscription.t, String.t) :: Subscription.t
-  def set_channel(%Subscription{} = subscription, channel_name) do
-    put_in(subscription.channel, channel_name)
-  end
-
-  @spec set_time_token(Subscription.t, String.t) :: Subscription.t
-  def set_time_token(%Subscription{} = subscription, time_token) do
-    put_in(subscription.time_token, time_token)
-  end
-
-  @spec set_callback(Subscription.t, String.t) :: Subscription.t
-  def set_callback(%Subscription{} = subscription, callback) do
-    put_in(subscription.callback, callback)
+  @spec build(Config.t, Keyword.t) :: Subscription.t
+  def build(config, subs_params) do
+    %Subscription{
+      path: config.base_url <> "subscribe",
+      sub_key: config.subscription_key,
+      channel: subs_params[:channel],
+      time_token: subs_params[:time_token],
+      callback: subs_params[:callback]
+    }
   end
 
   defimpl PubNux.Builder do
     def build_url(subscription) do
       url =
         [subscription.path, subscription.sub_key, subscription.channel, subscription.callback, subscription.time_token]
+        |> Stream.filter(fn(v) -> v != nil end)
         |> Enum.join("/")
         |> URI.encode()
 
       [method: "GET", url: url, body: [], headers: []]
     end
   end
-
 end

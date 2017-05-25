@@ -1,25 +1,8 @@
 defmodule PubNux.Publication do
-  alias __MODULE__
-
   @moduledoc """
     Publish messages to the provided channel
-
-    ## Examples
-
-    iex>  %Publication{}
-    ...>  |> Publication.set_channel("channel_name")
-    ...>  |> Publication.set_callback("callback")
-    ...>  |> Publication.set_message("hello world")
-    %PubNux.Publication{
-      path: nil,
-      callback: "callback",
-      channel: "channel_name",
-      message: "hello world",
-      sub_key: nil,
-      pub_key: nil,
-      store: 0
-    }
   """
+  alias __MODULE__
 
   defstruct path: nil,
             sub_key: nil,
@@ -40,36 +23,17 @@ defmodule PubNux.Publication do
                           message: String.t,
                           store: boolean()}
 
-  @spec build(Config.t) :: Publication.t
-  def build(config) do
-    %Publication{path: config.base_url <> "publish", sub_key: config.subscription_key, pub_key: config.publish_key}
-  end
-
-  @spec set_channel(Publication.t, String.t) :: Publication.t
-  def set_channel(%Publication{} = publication, channel) do
-    put_in(publication.channel, channel)
-  end
-
-  @spec set_callback(Publication.t, String.t) :: Publication.t
-  def set_callback(%Publication{} = publication, callback) do
-    put_in(publication.callback, callback)
-  end
-
-  @spec set_message(Publication.t, map()) :: Publication.t
-  def set_message(%Publication{} = publication, message) when is_map(message) do
-    payload = Poison.encode!(message)
-
-    put_in(publication.message, payload)
-  end
-
-
-  @spec set_message(Publication.t, String.t) :: Publication.t
-  def set_message(%Publication{} = publication, message) when is_binary(message) do
-    put_in(publication.message, message)
-  end
-
-  def set_store(%Publication{} = publication) do
-    put_in(publication.store, 1)
+  @spec build(Config.t, Keyword.t) :: Publication.t
+  def build(config, pub_params) do
+    %Publication{
+      channel: pub_params[:channel],
+      callback: pub_params[:callback],
+      message: pub_params[:message],
+      store: pub_params[:store],
+      path: config.base_url <> "publish",
+      sub_key: config.subscription_key,
+      pub_key: config.publish_key
+    }
   end
 
   defimpl PubNux.Builder do
