@@ -1,38 +1,23 @@
 defmodule PubNux.Publication do
   alias __MODULE__
-  alias PubNux.Config
 
   @moduledoc """
     Publish messages to the provided channel
 
     ## Examples
 
-    iex>  Config.build()
-    ...>  |> Publication.build()
+    iex>  %Publication{}
     ...>  |> Publication.set_channel("channel_name")
     ...>  |> Publication.set_callback("callback")
     ...>  |> Publication.set_message("hello world")
     %PubNux.Publication{
-      path: "http://pubsub.pubnub.com/publish",
+      path: nil,
       callback: "callback",
       channel: "channel_name",
       message: "hello world",
+      sub_key: nil,
+      pub_key: nil,
       store: 0
-    }
-
-    ## You can also send a map as message
-    iex>  Config.build()
-    ...>  |> Publication.build()
-    ...>  |> Publication.set_channel("channel_name")
-    ...>  |> Publication.set_callback("callback")
-    ...>  |> Publication.set_message(%{hola: "mundo"})
-    ...>  |> Publication.set_store()
-    %PubNux.Publication{
-      path: "http://pubsub.pubnub.com/publish",
-      callback: "callback",
-      channel: "channel_name",
-      message: ~s({"hola":"mundo"}
-      store: 1),
     }
   """
 
