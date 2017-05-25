@@ -1,6 +1,6 @@
 defmodule PubNux do
   @moduledoc """
-  Documentation for PubNux.
+    TODO: Write this docs
   """
   alias PubNux.{Config, Client, Subscription, Publication}
 

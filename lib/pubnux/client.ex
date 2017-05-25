@@ -1,6 +1,6 @@
 defmodule PubNux.Client do
-  @moduledoc """
-  Wrap http client
+    @moduledoc """
+  Wrap http client for PubNub API
   """
   alias PubNux.Builder
 
@@ -8,8 +8,25 @@ defmodule PubNux.Client do
   @type http_bad_request_response :: {:error, String.t, code: Integer.t}
   @type http_error_response :: {:error, String.t}
 
+  @doc """
+    Calls the provided service in the PubNub API. `resource` represents a PubNub service,
+    for instance the structure `%PubNux.Subscription{}` builds the request params asked for PubNub.
+
+    ## Examples
+
+      iex> Config.build()
+      ...> |> Subscription.build(subs_keyword)
+      ...> |> Client.perform_request()
+      {:ok, "defaultCallback([[],\"14957412179337572\"])"}
+
+
+      iex> Config.build()
+      ...> |> Publication.build(subs_keyword)
+      ...> |> Client.perform_request()
+      {:ok, "defaultCallback([[],\"14957412179337572\"])"}
+  """
   @spec perform_request(any()) ::
-  {:ok, http_response()} | {:error, http_error_response() | http_bad_request_response()}
+    {:ok, http_response()} | {:error, http_error_response() | http_bad_request_response()}
   def perform_request(resource) do
     resource
     |> Builder.build_url()
