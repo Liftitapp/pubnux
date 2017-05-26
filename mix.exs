@@ -11,6 +11,7 @@ defmodule PubNux.Mixfile do
       description: description(),
       package: package(),
       deps: deps(),
+      aliases: aliases(),
       name: "PubNux",
       elixirc_paths: elixirc_paths(Mix.env()),
       preferred_cli_env: preferred_cli_env(),
@@ -22,7 +23,6 @@ defmodule PubNux.Mixfile do
     [extra_applications: [:logger, :httpoison]]
   end
 
-  # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_),     do: ["lib"]
 
@@ -30,7 +30,9 @@ defmodule PubNux.Mixfile do
     [
       {:poison, "~> 2.2"},
       {:httpoison, "~> 0.9.0"},
-      {:exvcr, "~> 0.8", only: :test}
+      {:exvcr, "~> 0.8", only: :test},
+      {:dialyxir, "~> 0.4.1", only: :dev},
+      {:credo, "~> 0.7.4", only: [:dev, :test]},
     ]
   end
 
@@ -52,6 +54,15 @@ defmodule PubNux.Mixfile do
   def preferred_cli_env do
     [
       vcr: :test, "vcr.delete": :test, "vcr.check": :test, "vcr.show": :test
+    ]
+  end
+
+  def aliases do
+    [
+      "ci": [
+        "test",
+        "credo"
+      ]
     ]
   end
 end
