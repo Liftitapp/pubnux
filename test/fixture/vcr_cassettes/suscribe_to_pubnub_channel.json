@@ -1,0 +1,26 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://ps.pndsn.com/subscribe/sub/channel/callback/0"
+    },
+    "response": {
+      "body": "callback([[],\"14958154461563527\"])",
+      "headers": {
+        "Date": "Fri, 26 May 2017 16:17:50 GMT",
+        "Content-Type": "text/javascript; charset=\"UTF-8\"",
+        "Content-Length": "34",
+        "Connection": "keep-alive",
+        "Cache-Control": "no-cache",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "request": {
+      "body": "\"{\\\"Hola\\\":\\\"mundo\\\"}\"",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": [],
+      "request_body": "",
+      "url": "http://ps.pndsn.com/publish/pub/sub/1/channel/callback"
+    },
+    "response": {
+      "body": "callback([1,\"Sent\",\"14958154704272217\"])",
+      "headers": {
+        "Date": "Fri, 26 May 2017 16:17:50 GMT",
+        "Content-Type": "text/javascript; charset=\"UTF-8\"",
+        "Content-Length": "40",
+        "Connection": "keep-alive",
+        "Cache-Control": "no-cache",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
