@@ -1,6 +1,6 @@
 defmodule PubNux.Subscription do
   @moduledoc """
-    Suscribes messages to the provided channel
+  Suscribes messages to the provided channel
   """
   alias __MODULE__
 
@@ -31,14 +31,20 @@ defmodule PubNux.Subscription do
   end
 
   defimpl PubNux.Builder do
-    def build_url(subscription) do
+    def build_request_params(subscription) do
       url =
-        [subscription.path, subscription.sub_key, subscription.channel, subscription.callback, subscription.time_token]
+        [
+          subscription.path,
+          subscription.sub_key,
+          subscription.channel,
+          subscription.callback,
+          subscription.time_token
+        ]
         |> Stream.filter(fn(v) -> v != nil end)
         |> Enum.join("/")
         |> URI.encode()
 
-      [method: "GET", url: url, body: [], headers: []]
+      [method: :get, url: url, body: [], headers: []]
     end
   end
 end

@@ -1,6 +1,6 @@
 defmodule PubNux.Publication do
   @moduledoc """
-    Publish messages to the provided channel
+  Publish messages to the provided channel
   """
   alias __MODULE__
 
@@ -25,11 +25,13 @@ defmodule PubNux.Publication do
 
   @spec build(Config.t, Keyword.t) :: Publication.t
   def build(config, pub_params) do
+    encoded_message = Poison.encode!(pub_params[:message])
+
     %Publication{
       channel: pub_params[:channel],
       callback: pub_params[:callback],
-      message: pub_params[:message],
       store: pub_params[:store],
+      message: encoded_message,
       path: config.base_url <> "publish",
       sub_key: config.subscription_key,
       pub_key: config.publish_key
@@ -37,12 +39,19 @@ defmodule PubNux.Publication do
   end
 
   defimpl PubNux.Builder do
-    def build_url(publication) do
+    def build_request_params(publication) do
       store =
         if publication.store, do: 1, else: 0
 
       url =
-        [publication.path, publication.pub_key, publication.sub_key, store, publication.channel, publication.callback]
+        [
+          publication.path,
+          publication.pub_key,
+          publication.sub_key,
+          store,
+          publication.channel,
+          publication.callback
+        ]
         |> Enum.join("/")
         |> URI.encode()
 
@@ -54,5 +63,4 @@ defmodule PubNux.Publication do
       ]
     end
   end
-
 end
