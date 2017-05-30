@@ -12,7 +12,7 @@ by adding `pubnux` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:pubnux, "~> 0.1.0"}]
+  [{:pubnux, git: "https://github.com/MrCoffey/pubnux", branch: master, app: false}]
 end
 ```
 
@@ -28,8 +28,6 @@ config :pubnux,
 ## Usage
 
 ```elixir
-alias PubNux
-
 PubNux.subscribe("channel-name")
 ```
 

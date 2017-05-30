@@ -45,7 +45,7 @@ defmodule PubNux.Client do
     case response do
       {:ok, %HTTPoison.Response{body: body, headers: _, status_code: 200}} ->
         {:ok, body}
-      {:ok, %HTTPoison.Response{body: body, headers: _, status_code: status_code}} when status_code > 400 ->
+      {:ok, %HTTPoison.Response{body: body, headers: _, status_code: status_code}} when status_code >= 400 ->
         {:error, body, code: status_code}
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:error, "Unable to comunicate with PubNux service. Reason: #{reason}"}
