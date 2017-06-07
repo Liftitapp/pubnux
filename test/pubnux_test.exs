@@ -18,7 +18,7 @@ defmodule PubNuxTest do
           }
 
         {:ok, callback} = PubNux.publish("testChannel", message, "testCallback", 0)
-        assert callback = "testCallback([1,\"Sent\",\"14961805385605906\"])"
+        assert callback == "testCallback([1,\"Sent\",\"14961805385605906\"])"
       end
     end
   end
