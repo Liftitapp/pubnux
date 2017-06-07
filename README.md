@@ -1,5 +1,5 @@
 # PubNux
-[![Build Status](https://travis-ci.org/MrCoffey/pubnux.svg?branch=master)](https://travis-ci.org/MrCoffey/pubnux)
+[![Build Status](https://travis-ci.org/Liftitapp/pubnux.svg?branch=master)](https://travis-ci.org/Liftitapp/pubnux)
 
 A wrapper for PubNub's API.
 
