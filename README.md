@@ -12,7 +12,7 @@ by adding `pubnux` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
-  [{:pubnux, git: "https://github.com/MrCoffey/pubnux", branch: master, app: false}]
+  [{:pubnux, "~> 0.0.1"]
 end
 ```
 
