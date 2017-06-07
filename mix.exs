@@ -15,7 +15,7 @@ defmodule PubNux.Mixfile do
       name: "PubNux",
       elixirc_paths: elixirc_paths(Mix.env()),
       preferred_cli_env: preferred_cli_env(),
-      source_url: "https://github.com/MrCoffey/pubnux"
+      source_url: "https://github.com/liftitap/pubnux"
     ]
   end
 
@@ -47,7 +47,7 @@ defmodule PubNux.Mixfile do
       name: :pubnux,
       maintainers: ["Jorge Madrid"],
       licenses: ["Apache 2.0"],
-      links: %{"GitHub" => "https://github.com/MrCoffey/pubnux"}
+      links: %{"GitHub" => "https://github.com/liftitapp/pubnux"}
     ]
   end
 
