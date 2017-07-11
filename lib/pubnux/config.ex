@@ -20,14 +20,18 @@ defmodule PubNux.Config do
   @doc """
   Choose the http protocol, and defines the base url
   """
-  @spec build() :: Config.t
-  def build do
-    %Config{base_url: base_url()}
-  end
+  @spec build :: Config.t
+  def build, do: %Config{base_url: base_url()}
+
+  @spec build(nil) :: Config.t
+  def build(nil), do: %Config{base_url: base_url()}
+
+  @spec build(String.t) :: Config.t
+  def build(custom_url), do: %Config{base_url: base_url(custom_url)}
 
   defp base_url do
     protocol = if %Config{}.is_ssl, do: "https://", else: "http://"
-
     protocol <> %Config{}.origin
   end
+  defp base_url(custom_url), do: custom_url
 end
