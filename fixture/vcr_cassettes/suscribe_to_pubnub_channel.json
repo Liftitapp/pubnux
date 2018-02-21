@@ -6,12 +6,14 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://ps.pndsn.com/subscribe/sub/channel/callback/0"
+      "url":
+        "http://ps.pndsn.com/subscribe/sub-c-ce898f06-7608-11e7-81e6-0619f8945a4f/channel/callback/0"
     },
     "response": {
-      "body": "callback([[],\"14958154461563527\"])",
+      "binary": false,
+      "body": "callback([[],\"15192447392625468\"])",
       "headers": {
-        "Date": "Fri, 26 May 2017 16:17:50 GMT",
+        "Date": "Wed, 21 Feb 2018 20:25:39 GMT",
         "Content-Type": "text/javascript; charset=\"UTF-8\"",
         "Content-Length": "34",
         "Connection": "keep-alive",

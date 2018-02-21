@@ -16,9 +16,7 @@ defmodule PubNux.BuilderTest do
       assert request_params[:body] == []
       assert request_params[:headers] == []
     end
-  end
 
-  describe "build_url/1" do
     test "builds a request Keyword receiving a Publication structure" do
       params = [
         {:channel, "channel"},

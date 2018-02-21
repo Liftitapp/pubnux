@@ -1,19 +1,22 @@
 [
   {
     "request": {
-      "body": "{\"geo\":{\"type\":\"Feature\",\"properties\":{},\"id\":85670165,\"geometry\":{\"coordinates\":[[[-74.06725643633541,4.8293179395713]]]}},\"channel\":\"test_geo_json\"}",
+      "body":
+        "{\"geo\":{\"type\":\"Feature\",\"properties\":{},\"id\":85670165,\"geometry\":{\"coordinates\":[[[-74.06725643633541,4.8293179395713]]]}}}",
       "headers": {
         "Content-Type": "application/json"
       },
       "method": "post",
       "options": [],
       "request_body": "",
-      "url": "http://ps.pndsn.com/publish/pub/sub/1/testChannel/testCallback"
+      "url":
+        "http://ps.pndsn.com/publish/pub-c-e72030bd-19b4-46d8-a29b-e1bf93dfa3c1/sub-c-ce898f06-7608-11e7-81e6-0619f8945a4f/1/testChannel/testCallback"
     },
     "response": {
-      "body": "testCallback([1,\"Sent\",\"14961805385605906\"])",
+      "binary": false,
+      "body": "testCallback([1,\"Sent\",\"15192447398578186\"])",
       "headers": {
-        "Date": "Tue, 30 May 2017 21:42:18 GMT",
+        "Date": "Wed, 21 Feb 2018 20:25:39 GMT",
         "Content-Type": "text/javascript; charset=\"UTF-8\"",
         "Content-Length": "44",
         "Connection": "keep-alive",
