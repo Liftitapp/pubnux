@@ -6,8 +6,7 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url":
-        "http://ps.pndsn.com/subscribe/sub-c-ce898f06-7608-11e7-81e6-0619f8945a4f/channel/callback/0"
+      "url": "http://ps.pndsn.com/subscribe/sub-c-ce898f06/channel/callback/0"
     },
     "response": {
       "binary": false,
