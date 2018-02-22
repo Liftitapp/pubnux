@@ -22,13 +22,7 @@ defmodule PubNuxTest do
     test "Publish a new message", %{message: message} do
       use_cassette "subscription" do
         {:ok, callback} = PubNux.publish("testChannel", message, "testCallback", 0)
-        assert callback == "testCallback([1,\"Sent\",\"14961805385605906\"])"
-      end
-    end
-
-    test "creates a new request using a custom base url", %{message: message} do
-      use_cassette "weird subscription" do
-        {:error, _, _} = PubNux.publish("testChannel", message, "testCallback", 0, "wepa.com/")
+        assert "testCallback([1,\"Sent\",\"15192447398578186\"])" = callback
       end
     end
   end
