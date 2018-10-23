@@ -24,7 +24,14 @@ defmodule PubNux.Config do
   def build, do: %Config{base_url: base_url()}
 
   @spec build(nil) :: Config.t
-  def build(nil), do: %Config{base_url: base_url()}
+  def build(nil) do
+    %Config{
+      base_url: base_url(),
+      publish_key: Application.get_env(:pubnux, :publish_key),
+      subscription_key: Application.get_env(:pubnux, :subscription_key),
+      is_ssl: (Application.get_env(:pubnux, :is_ssl) || false)
+    }
+  end
 
   @spec build(String.t) :: Config.t
   def build(custom_url), do: %Config{base_url: base_url(custom_url)}
